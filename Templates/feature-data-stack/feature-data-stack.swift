@@ -3,7 +3,7 @@ import ProjectDescription
 let name: Template.Attribute = .required("Name")     // e.g. Post
 
 let template = Template(
-  description: "repo - query scaffold",
+  description: "requred: name",
   attributes: [name],
   items: [
     .file(
