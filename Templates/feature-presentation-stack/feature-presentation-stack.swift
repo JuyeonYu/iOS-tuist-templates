@@ -1,7 +1,7 @@
 
 import ProjectDescription
 
-let action: Template.Attribute = .optional("Action")
+let action: Template.Attribute = .optional("Action", default: .string(""))
 let name: Template.Attribute = .required("Name")
 
 let template = Template(
