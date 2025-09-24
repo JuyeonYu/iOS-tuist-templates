@@ -9,15 +9,15 @@ let template = Template(
   attributes: [action, name],
   items: [
     .file(
-      path: "Features/\(name)/UI/\(action)\(name)UseCase.swift",
+      path: "Features/\(name)/UI/\(action)\(name)View.swift",
       templatePath: "View.swift.stencil"
     ),
     .file(
-      path: "Features/\(name)/UI/\(action)\(name)UseCase.swift",
+      path: "Features/\(name)/UI/\(action)\(name)ViewController.swift",
       templatePath: "ViewController.swift.stencil"
     ),
     .file(
-      path: "Features/\(name)/Presentation/\(action)\(name)UseCase.swift",
+      path: "Features/\(name)/Presentation/\(action)\(name)Reactor.swift",
       templatePath: "Reactor.swift.stencil"
     ),
   ]
