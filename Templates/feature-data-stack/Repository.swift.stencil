@@ -1,1 +1,41 @@
 {{ Name }}
+
+import Foundation
+import RxSwift
+import RxRelay
+import Factory
+
+protocol {{ Name }}Repository {
+    var {{ Name }}Stream: Observable<{{ Name }}State> { get }
+}
+
+struct {{ Name }}State: Equatable {
+    var version: Int = 0
+}
+
+final class {{ Name }}RepositoryLive: {{ Name }}Repository {
+    @Injected(\.apiService) private var apiService
+    
+    private var {{ Name }}State: BehaviorRelay<{{ Name }}State> = .init(value: .init())
+    var {{ Name }}Stream: Observable<{{ Name }}State> {
+        myBoardState
+            .compactMap { $0 }
+            .distinctUntilChanged()
+            .share(replay: 1, scope: .whileConnected)
+    }
+    
+    enum ModelChange {
+        
+    }
+    
+    private func apply(_ change: ModelChange) {
+        let currentState = {{ Name }}State
+        var newState = currentState.value
+        switch change {
+        }
+        
+        newState.version += 1
+        current.accept(target)
+    }
+}
+

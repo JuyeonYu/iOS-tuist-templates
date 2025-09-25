@@ -1,3 +1,84 @@
 import Foundation
 
-{{ Action }} {{ Name }}
+{{ Action }}{{ Name }}
+
+import UIKit
+
+import Moya
+import ReactorKit
+import RxCocoa
+import RxSwift
+import UIKit
+
+class {{ Action }}{{ Name }}ViewController: UIViewController, ReactorKit.View {
+    typealias Reactor = {{ Action }}{{ Name }}Reactor
+    var disposeBag: RxSwift.DisposeBag = .init()
+    let {{ Action }}{{ Name }}View: {{ Action }}{{ Name }}View = .init()
+    
+    init(reactor: {{ Action }}{{ Name }}Reactor) {
+    }
+}
+    
+    override func loadView() {
+        view = manageProfileView
+        reactor = ManageProfileReactor()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        manageProfileView.delegate = self
+        addChild(pageViewController)
+        manageProfileView.setpageView(pageViewController.view)
+        pageViewController.didMove(toParent: self)
+
+        pageViewController.setViewcontrollersFromIndex(index: 0)
+    }
+    
+    var loadFirst: Bool = true
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let initialMenuIdx, loadFirst {
+            loadFirst = false
+            pageViewController.setViewcontrollersFromIndex(index: initialMenuIdx)
+            manageProfileView.setSegment(index: initialMenuIdx)
+        }
+    }
+    
+    func bind(reactor: ManageProfileReactor) {
+        Observable.just(())
+            .map { Reactor.Action.fetchProfile }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+    }
+}
+
+extension ManageProfileViewController: ManageProfileViewDelegate {
+    func onHack() {
+        ProfileAPIManager.shared.resetHack()
+            .subscribe(onNext: {
+                print($0.msg)
+            }).disposed(by: self.disposeBag)
+    }
+    
+    func onSegment(idx: Int) {
+        pageViewController.setViewcontrollersFromIndex(index: idx)
+    }
+    func onBack() {
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+extension ManageProfileViewController {
+    enum Factory {
+        static func make(initialMenu: Int = 0) -> ManageProfileViewController {
+            let vc = ManageProfileViewController(
+                nibName: nil, bundle: nil)
+            vc.pageViewController.setViewcontrollersFromIndex(index: initialMenu)
+            vc.manageProfileView.setSegment(index: initialMenu)
+            return vc
+        }
+    }
+}

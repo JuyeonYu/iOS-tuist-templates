@@ -1,3 +1,27 @@
 import Foundation
 
-{{ Action }} {{ Name }}
+{{ Action }}{{ Name }}
+
+import Foundation
+import RxSwift
+
+extension {{ Name }}UseCase {
+    struct {{ Action }}{{ Name }}Query {
+    }
+    
+    protocol {{ Action }}{{ Name }}: QueryUseCase where Query == {{ Action }}{{ Name }}Query {
+        
+    }
+    
+    final class {{ Action }}{{ Name }}UseCase: {{ Name }}UseCase.{{ Action }}{{ Name }} {
+        private let repository: BoardRepository
+        
+        init(repository: {{ Name }}Repository) {
+            self.repository = repository
+        }
+        
+        func execute(_ query: {{ Name }}UseCase.{{ Action }}{{ Name }}Query) -> RxSwift.Completable {
+            .empty()
+        }
+    }
+}

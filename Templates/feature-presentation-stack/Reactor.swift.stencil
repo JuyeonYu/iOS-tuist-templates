@@ -1,3 +1,35 @@
 import Foundation
 
-{{ Action }} {{ Name }}
+class {{ Name }}Reactor: Reactor {
+    enum Action {
+        
+    }
+    
+    enum Mutation {
+        
+    }
+    
+    struct State {
+        
+    }
+    
+    var initialState: State = .init()
+    
+    func mutate(action: Action) -> Observable<Mutation> {
+        switch action {
+            
+        }
+    }
+    
+    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
+        .empty()
+    }
+    
+    func reduce(state: State, mutation: Mutation) -> State {
+        var newState = state
+        switch mutation {
+            
+        }
+        return newState
+    }
+}

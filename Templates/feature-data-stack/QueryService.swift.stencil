@@ -1,1 +1,16 @@
-{{ Name }}
+import Foundation
+import RxSwift
+
+protocol {{ Name }}QueryService {
+
+}
+
+final class {{ Name }}QueryServiceLive: {{ Name }}QueryService {
+    private let repository: {{ Name }}Repository
+    
+    init(repository: {{ Name }}Repository) {
+        self.repository = repository
+    }
+    
+}
+
