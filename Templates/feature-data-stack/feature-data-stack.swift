@@ -17,7 +17,7 @@ let template = Template(
     
     .file(
       path: "Features/\(name)/Usecase/\(name)Usecase.swift",
-      templatePath: "Usecase.swift.stencil"
+      templatePath: "UsecasePlaceholder.swift.stencil"
     ),
   ]
 )
