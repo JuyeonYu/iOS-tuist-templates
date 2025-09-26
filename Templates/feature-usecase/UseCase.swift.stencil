@@ -14,7 +14,7 @@ extension {{ Name }}UseCase {
     }
     
     final class {{ Action }}{{ Name }}UseCase: {{ Name }}UseCase.{{ Action }}{{ Name }} {
-        private let repository: BoardRepository
+        private let repository: {{ Name }}Repository
         
         init(repository: {{ Name }}Repository) {
             self.repository = repository
@@ -24,4 +24,13 @@ extension {{ Name }}UseCase {
             .empty()
         }
     }
+}
+
+extension Container {
+    var {{ Action }}{{ Name }}UseCase: Factory<{{ Name }}UseCase.{{ Action }}{{ Name }}UseCase> {
+        Factory(self) {
+                {{ Name }}UseCase.{{ Action }}{{ Name }}UseCase(repository: self.{{ Name }}Repository.resolve())
+        }
+    }
+
 }

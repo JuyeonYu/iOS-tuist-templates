@@ -1,5 +1,3 @@
-{{ Name }}
-
 import Foundation
 import RxSwift
 import RxRelay
@@ -35,7 +33,14 @@ final class {{ Name }}RepositoryLive: {{ Name }}Repository {
         }
         
         newState.version += 1
-        current.accept(target)
+        currentState.accept(target)
     }
 }
 
+extension Container {
+    var {{ Name|lower }}Repository: Factory<{{ Name }}Repository> {
+        Factory(self) {
+        {{ Name }}RepositoryLive()
+        }.singleton
+    }
+}
